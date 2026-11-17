@@ -1,0 +1,33 @@
+// ============================================================
+// Listas de itens
+// <div class="list"><div class="list-row">…</div><div class="list-row">…</div></div>
+// Dividida: <ul class="list-divided"><li>…</li></ul>
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}list {
+  display: flex;
+  flex-direction: column;
+  gap: space(nano);
+}
+
+.#{$prefix}list-row {
+  display: flex;
+  align-items: center;
+  gap: space(micro);
+  min-height: 4rem;
+  padding: space(nano) space(mini);
+  border-radius: radius(sm);
+  background: v(interactive-secondary);
+
+  &-link {
+    cursor: pointer;
+    @include transition((background-color));
+    &:hover { background: v(interactive-secondary-hover); }
+  }
+}
+
+.#{$prefix}list-divided {
+  > * { padding: space(micro) 0; }
+  > * + * { border-top: 1px solid v(layout-border); }
+}

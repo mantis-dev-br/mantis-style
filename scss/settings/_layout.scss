@@ -1,0 +1,20 @@
+// ============================================================
+// Layout: containers e casca de aplicação (header + sidebar + main)
+// ============================================================
+
+$container-max-width: 1694px !default;
+$container-padding: 1rem !default;
+
+$containers: (
+  "sm": 640px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1280px,
+) !default;
+
+$app-header-height: 3.5rem !default;
+$app-nav-width: 16rem !default;
+$app-nav-collapsed-width: 4.5rem !default;
+
+/// Abaixo deste breakpoint a sidebar vira menu off-canvas.
+$app-mobile-breakpoint: "lg" !default;

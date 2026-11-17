@@ -1,0 +1,16 @@
+// ============================================================
+// Animações (com prefixo para não colidir: ms-fade, ms-pop...)
+// ============================================================
+@use "../tools" as *;
+
+@keyframes #{kf(fade)} { from { opacity: 0; } }
+@keyframes #{kf(pop)} { from { opacity: 0; transform: scale(.97); } }
+@keyframes #{kf(slide-up)} { from { opacity: 0; transform: translateY(.5rem); } }
+@keyframes #{kf(slide-in-right)} { from { transform: translateX(100%); } }
+@keyframes #{kf(slide-in-left)} { from { transform: translateX(-100%); } }
+@keyframes #{kf(pulse)} { 50% { opacity: .5; } }
+@keyframes #{kf(spin)} { to { transform: rotate(360deg); } }
+@keyframes #{kf(indeterminate)} {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(250%); }
+}

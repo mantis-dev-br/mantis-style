@@ -1,0 +1,90 @@
+// ============================================================
+// Overlay e modal
+// <div class="overlay">
+//   <div class="modal" role="dialog" aria-modal="true">
+//     <div class="modal-header"><h2 class="modal-title">…</h2><button class="btn btn-ghost btn-icon btn-sm">×</button></div>
+//     <div class="modal-body">…</div>
+//     <div class="modal-footer">…</div>
+//   </div>
+// </div>
+// Também funciona com <dialog class="modal"> nativo (showModal()).
+// Tamanhos: modal-sm, modal-lg, modal-xl, modal-full
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}overlay {
+  position: fixed;
+  inset: 0;
+  z-index: z(overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: space(mini);
+  background: v(layout-overlay);
+  animation: kf(fade) $duration-fast $easing;
+
+  &-top {
+    align-items: flex-start;
+    padding-top: 10vh;
+  }
+}
+
+.#{$prefix}modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 37.5rem;
+  max-height: 90vh;
+  overflow: hidden;
+  border-radius: radius(md);
+  background: v(layout-surface);
+  color: v(content-title);
+  box-shadow: shadow(level4);
+  animation: kf(pop) .18s $easing;
+
+  &-sm { max-width: 25rem; }
+  &-lg { max-width: 50rem; }
+  &-xl { max-width: 72rem; }
+  &-full {
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: space(mini);
+    padding: space(mini) space(xxs);
+    border-bottom: 1px solid v(layout-border);
+  }
+
+  &-title {
+    @include type(heading-xs);
+    color: v(content-title);
+  }
+
+  &-body {
+    padding: space(xxs);
+    overflow: auto;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: space(nano);
+    padding: space(mini) space(xxs);
+    border-top: 1px solid v(layout-border);
+  }
+}
+
+// <dialog> nativo: sem isto o display:flex mostraria o modal fechado
+dialog.#{$prefix}modal {
+  margin: auto;
+  padding: 0;
+
+  &:not([open]) { display: none; }
+  &::backdrop { background: v(layout-overlay, rgba(38, 39, 43, .32)); }
+}

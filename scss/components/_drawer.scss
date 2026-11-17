@@ -1,0 +1,52 @@
+// ============================================================
+// Drawer (painel lateral)
+// <aside class="drawer"> (abre pela direita) · drawer-left (pela esquerda)
+//   <div class="drawer-header">…</div><div class="drawer-body">…</div><div class="drawer-footer">…</div>
+// </aside>
+// Use com .overlay atrás para escurecer a página.
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: z(drawer);
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 28rem);
+  background: v(layout-spotlight);
+  color: v(content-title);
+  box-shadow: shadow(level4);
+  animation: kf(slide-in-right) $duration-base $easing;
+
+  &-left {
+    right: auto;
+    left: 0;
+    animation-name: kf(slide-in-left);
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: space(mini);
+    padding: space(mini) space(xxs);
+    border-bottom: 1px solid v(layout-border);
+  }
+
+  &-body {
+    flex: 1;
+    padding: space(xxs);
+    overflow: auto;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: space(nano);
+    padding: space(mini) space(xxs);
+    border-top: 1px solid v(layout-border);
+  }
+}

@@ -1,0 +1,36 @@
+// ============================================================
+// Alerta (mensagem fixa na página)
+// <div class="alert alert-warning" role="alert">
+//   <svg class="icon">…</svg>
+//   <div><p class="alert-title">Atenção</p><p>O plano vence em 3 dias.</p></div>
+// </div>
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}alert {
+  display: flex;
+  align-items: flex-start;
+  gap: space(micro);
+  padding: space(mini);
+  border-radius: radius(md);
+  background: v(neutral-bg);
+  color: v(content-title);
+  font-size: .875rem;
+  line-height: 1.5;
+
+  > .#{$prefix}icon { margin-top: .0625rem; }
+
+  @each $s in $statuses {
+    &-#{$s} {
+      background: v("#{$s}-bg");
+      color: v("#{$s}-fg");
+    }
+  }
+
+  &-promote {
+    background: v(promote-alt);
+    color: v(content-title);
+  }
+
+  &-title { font-weight: 600; }
+}

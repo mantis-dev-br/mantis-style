@@ -1,0 +1,53 @@
+// ============================================================
+// Raios, sombras, camadas, movimento e controles
+// ============================================================
+
+$radii: (
+  "none": 0,
+  "xs": .25rem,
+  "sm": .5rem,
+  "md": 1rem,
+  "lg": 1.5rem,
+  "pill": 31.25rem,
+  "circular": 50%,
+) !default;
+
+$shadows: (
+  "level1": 0 1px 2px rgba(0, 0, 0, .06),
+  "level2": 0 .25rem .75rem rgba(0, 0, 0, .06),
+  "level3": 0 .5rem 1.5rem rgba(0, 0, 0, .08),
+  "level4": 0 1rem 3rem rgba(0, 0, 0, .08),
+) !default;
+
+/// No escuro a sombra precisa de mais opacidade para aparecer.
+$shadows-dark: (
+  "level1": 0 1px 2px rgba(0, 0, 0, .32),
+  "level2": 0 .25rem .75rem rgba(0, 0, 0, .32),
+  "level3": 0 .5rem 1.5rem rgba(0, 0, 0, .4),
+  "level4": 0 1rem 3rem rgba(0, 0, 0, .48),
+) !default;
+
+$z-index: (
+  "base": 0,
+  "sticky": 30,
+  "dropdown": 40,
+  "overlay": 50,
+  "drawer": 51,
+  "tooltip": 60,
+  "toast": 999,
+) !default;
+
+$duration-fast: .15s !default;
+$duration-base: .2s !default;
+$duration-slow: .4s !default;
+$easing: ease !default;
+
+/// Alturas dos controles (botões, inputs, abas).
+$control-heights: (
+  "sm": 2rem,
+  "md": 2.5rem,
+  "lg": 3rem,
+) !default;
+
+$opacity-disabled: .48 !default;
+$focus-ring-width: 3px !default;

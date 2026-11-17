@@ -1,0 +1,68 @@
+// ============================================================
+// Funções. Não geram CSS.
+// ============================================================
+@use "sass:map";
+@use "sass:string";
+@use "../settings" as s;
+
+/// Referência a um token: v(content-title) => var(--ms-content-title)
+@function v($name, $fallback: null) {
+  @if $fallback != null {
+    @return var(--#{s.$var-prefix}#{$name}, #{$fallback});
+  }
+  @return var(--#{s.$var-prefix}#{$name});
+}
+
+@function _get($map, $key, $label) {
+  @if not map.has-key($map, $key) {
+    @error "mantis-style: '#{$key}' não existe em #{$label}. Opções: #{map.keys($map)}";
+  }
+  @return map.get($map, $key);
+}
+
+/// Espaçamento nomeado: space(mini) => 1rem
+@function space($key) {
+  @return _get(s.$spacers, $key, "$spacers");
+}
+
+/// Altura de controle: control-height(md) => 2.5rem
+@function control-height($key) {
+  @return _get(s.$control-heights, $key, "$control-heights");
+}
+
+/// Camada: z(overlay) => 50
+@function z($key) {
+  @return _get(s.$z-index, $key, "$z-index");
+}
+
+/// Raio como variável CSS: radius(md) => var(--ms-radius-md)
+@function radius($key) {
+  $_: _get(s.$radii, $key, "$radii");
+  @return v("radius-#{$key}");
+}
+
+/// Sombra como variável CSS: shadow(level4) => var(--ms-shadow-level4)
+@function shadow($key) {
+  $_: _get(s.$shadows, $key, "$shadows");
+  @return v("shadow-#{$key}");
+}
+
+/// Largura inicial do breakpoint: bp-min(md) => 768px
+@function bp-min($name) {
+  @return _get(s.$breakpoints, $name, "$breakpoints");
+}
+
+/// Último pixel antes do breakpoint: bp-max(md) => 767.98px
+@function bp-max($name) {
+  @return bp-min($name) - .02px;
+}
+
+/// Nome de animação com prefixo: kf(fade) => ms-fade
+@function kf($name) {
+  @return string.unquote("#{s.$var-prefix}#{$name}");
+}
+
+/// Nome de classe com prefixo: cls(btn) => "ms-btn"
+@function cls($name) {
+  @return "#{s.$prefix}#{$name}";
+}

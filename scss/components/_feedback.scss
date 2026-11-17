@@ -1,0 +1,70 @@
+// ============================================================
+// Estados de carregamento e vazio
+// Vazio:    <div class="empty"><span class="icon-shape icon-shape-lg">…</span><p class="empty-title">Nada aqui</p><p class="empty-text">…</p></div>
+// Skeleton: <div class="skeleton" style="height:4rem"></div> · skeleton-text · skeleton-circle
+// Spinner:  <span class="spinner" role="status" aria-label="Carregando"></span>
+// ============================================================
+@use "../tools" as *;
+
+// ---------- Vazio ----------
+.#{$prefix}empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: space(nano);
+  padding: space(sm) space(mini);
+  text-align: center;
+}
+
+.#{$prefix}empty-title {
+  @include type(heading-xs);
+  color: v(content-title);
+}
+
+.#{$prefix}empty-text {
+  max-width: 28rem;
+  color: v(content-base);
+  font-size: .875rem;
+}
+
+// ---------- Skeleton ----------
+.#{$prefix}skeleton {
+  border-radius: radius(md);
+  background: v(layout-border);
+  animation: kf(pulse) 1.4s $easing infinite;
+
+  &-text {
+    height: .75rem;
+    border-radius: radius(xs);
+  }
+
+  &-circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+}
+
+// ---------- Spinner ----------
+.#{$prefix}spinner {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  vertical-align: middle;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: kf(spin) .7s linear infinite;
+
+  &-sm { width: 1rem; height: 1rem; }
+  &-lg { width: 2rem; height: 2rem; border-width: 3px; }
+
+  // Com movimento reduzido o spinner continua girando, mas devagar
+  @if $enable-reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+      animation-duration: 1.5s !important;
+      animation-iteration-count: infinite !important;
+    }
+  }
+}

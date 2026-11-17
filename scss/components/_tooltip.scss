@@ -1,0 +1,40 @@
+// ============================================================
+// Tooltip só com CSS
+// <button class="btn" data-tooltip="Copiar">…</button>
+// Abaixo do elemento: data-tooltip-pos="bottom"
+// ============================================================
+@use "../tools" as *;
+
+:where([data-tooltip]) { position: relative; }
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + .5rem);
+  left: 50%;
+  z-index: z(tooltip);
+  padding: .375rem space(nano);
+  border-radius: radius(xs);
+  background: v(interactive-primary);
+  color: v(interactive-primary-fg);
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, .25rem);
+  transition: opacity $duration-fast $easing, transform $duration-fast $easing;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+[data-tooltip-pos="bottom"]::after {
+  top: calc(100% + .5rem);
+  bottom: auto;
+  transform: translate(-50%, -.25rem);
+}

@@ -1,0 +1,98 @@
+// ============================================================
+// Casca de aplicação (painel): header fixo, sidebar e conteúdo.
+//
+// <div class="app">               data-collapsed  => sidebar recolhida
+//   <header class="app-header">   data-nav-open   => sidebar aberta no mobile
+//   <nav class="app-nav">
+//   <main class="app-main">
+//
+// Também funciona com os elementos diretos (> header, > nav, > main).
+// ============================================================
+@use "../tools" as *;
+
+$_h: "--#{$var-prefix}app-header";
+$_w: "--#{$var-prefix}app-nav";
+
+.#{$prefix}app {
+  #{$_h}: #{$app-header-height};
+  #{$_w}: #{$app-nav-width};
+  display: grid;
+  min-height: 100vh;
+  grid-template:
+    "header header" var(#{$_h})
+    "nav main" 1fr
+    / var(#{$_w}) 1fr;
+
+  &[data-collapsed] {
+    #{$_w}: #{$app-nav-collapsed-width};
+
+    .#{$prefix}nav-label,
+    .#{$prefix}nav-heading { display: none; }
+    .#{$prefix}nav-item { justify-content: center; }
+  }
+
+  > header,
+  > .#{$prefix}app-header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+    z-index: z(sticky);
+    display: flex;
+    align-items: center;
+    gap: space(micro);
+    padding-inline: space(mini);
+    background: v(layout-surface);
+    border-bottom: 1px solid v(layout-border);
+  }
+
+  > nav,
+  > .#{$prefix}app-nav {
+    grid-area: nav;
+    position: sticky;
+    top: var(#{$_h});
+    height: calc(100vh - var(#{$_h}));
+    overflow: auto;
+    padding: space(micro);
+    background: v(layout-surface);
+    border-right: 1px solid v(layout-border);
+  }
+
+  > main,
+  > .#{$prefix}app-main {
+    grid-area: main;
+    min-width: 0;
+  }
+
+  @include media-down($app-mobile-breakpoint) {
+    &,
+    &[data-collapsed] {
+      grid-template:
+        "header" var(#{$_h})
+        "main" 1fr
+        / 1fr;
+    }
+
+    &[data-collapsed] {
+      .#{$prefix}nav-label,
+      .#{$prefix}nav-heading { display: revert; }
+      .#{$prefix}nav-item { justify-content: flex-start; }
+    }
+
+    > nav,
+    > .#{$prefix}app-nav {
+      position: fixed;
+      inset: var(#{$_h}) auto 0 0;
+      width: $app-nav-width;
+      height: auto;
+      z-index: z(dropdown);
+      transform: translateX(-100%);
+      transition: transform $duration-base $easing;
+    }
+
+    &[data-nav-open] > nav,
+    &[data-nav-open] > .#{$prefix}app-nav {
+      transform: none;
+      box-shadow: shadow(level4);
+    }
+  }
+}

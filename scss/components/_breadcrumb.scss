@@ -1,0 +1,32 @@
+// ============================================================
+// Breadcrumb (trilha de navegação)
+// <ol class="breadcrumb"><li><a href="/">Início</a></li><li aria-current="page">Arquivos</li></ol>
+// .crumb é a versão livre do mpanel (sem separador automático).
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}breadcrumb,
+.#{$prefix}crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: space(quark);
+  color: v(content-base);
+  font-size: .875rem;
+
+  a {
+    @include transition((color));
+    &:hover { color: v(content-title); }
+  }
+
+  [aria-current="page"] {
+    color: v(content-title);
+    font-weight: 500;
+  }
+}
+
+.#{$prefix}breadcrumb > li + li::before {
+  content: "/";
+  margin-right: space(quark);
+  color: v(content-placeholder);
+}

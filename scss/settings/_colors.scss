@@ -1,0 +1,170 @@
+// ============================================================
+// Cores
+// 1) Paleta bruta: valores fixos, use só para montar temas.
+// 2) Temas: tokens semânticos que viram variáveis CSS (--ms-*).
+//    Nos componentes, use sempre os tokens, nunca a paleta.
+// ============================================================
+@use "sass:color";
+
+// ---------- 1. Paleta bruta ----------
+$white: #fff !default;
+$black: #000 !default;
+
+$zinc-50: #f4f4f5 !default;
+$zinc-100: #e4e4e7 !default;
+$zinc-400: #a0a0ab !default;
+$zinc-500: #70707b !default;
+$zinc-600: #3f3f46 !default;
+$zinc-700: #26272b !default;
+$zinc-800: #18181b !default;
+$zinc-900: #0f0f11 !default;
+
+$gray-100: #e9e9e9 !default;
+$gray-200: #d6d6d6 !default;
+$gray-300: #bebebe !default;
+$gray-500: #7e7e7e !default;
+$gray-600: #525252 !default;
+$gray-700: #4a4a4a !default;
+$gray-800: #292929 !default;
+
+$magenta-100: #fccbd7 !default;
+$magenta-500: #cf0489 !default;
+
+$green-100: #e6fcd7 !default;
+$green-200: #a6f0a8 !default;
+$green-500: #27ac29 !default;
+$green-700: #117423 !default;
+
+$orange-100: #fef0ce !default;
+$orange-200: #fbc78f !default;
+$orange-500: #d66a0a !default;
+$orange-700: #b34f07 !default;
+
+$red-100: #fee5d4 !default;
+$red-300: #fb9d7e !default;
+$red-400: #f8775d !default;
+$red-500: #f43a29 !default;
+$red-600: #d11e1d !default;
+$red-700: #af1421 !default;
+
+$blue-100: #cee6fb !default;
+$blue-300: #9cc8fb !default;
+$blue-500: #2d7be5 !default;
+$blue-700: #1456c1 !default;
+
+$violet-200: #cbb8f2 !default;
+
+/// Status com variantes geradas em tags, alertas, progresso, toasts etc.
+/// Cada status precisa dos tokens "<nome>", "<nome>-fg" e "<nome>-bg" nos dois temas.
+$statuses: ("positive", "warning", "negative", "info") !default;
+
+// ---------- 2. Temas ----------
+$theme-light: (
+  // Texto
+  "content-title": $zinc-800,
+  "content-base": color.change($zinc-800, $alpha: .72),
+  "content-placeholder": color.change($zinc-700, $alpha: .64),
+  "content-primary": $gray-800,
+  "content-brand": $gray-600,
+  "content-on-color": $white,
+  // Superfícies
+  "layout-body": $zinc-50,
+  "layout-surface": $white,
+  "layout-spotlight": $white,
+  "layout-brand": $gray-600,
+  "layout-border": $zinc-100,
+  "layout-overlay": color.change($zinc-700, $alpha: .32),
+  // Interativos
+  "interactive-primary": $gray-800,
+  "interactive-primary-hover": $gray-700,
+  "interactive-primary-fg": $white,
+  "interactive-secondary": color.change($zinc-700, $alpha: .08),
+  "interactive-secondary-hover": color.change($zinc-500, $alpha: .16),
+  "interactive-destructive": $red-500,
+  "interactive-destructive-hover": $red-600,
+  "interactive-destructive-fg": $white,
+  // Foco
+  "highlight-focus": $gray-800,
+  "ring-shadow": $gray-300,
+  // Destaque da marca
+  "promote": $magenta-500,
+  "promote-alt": $magenta-100,
+  "promote-fg": $zinc-50,
+  // Status
+  "positive": $green-500,
+  "positive-fg": $green-700,
+  "positive-bg": $green-100,
+  "warning": $orange-500,
+  "warning-fg": $orange-700,
+  "warning-bg": $orange-100,
+  "negative": $red-600,
+  "negative-fg": $red-700,
+  "negative-bg": $red-100,
+  "info": $blue-500,
+  "info-fg": $blue-700,
+  "info-bg": $blue-100,
+  "neutral": $zinc-500,
+  "neutral-fg": $zinc-800,
+  "neutral-bg": $zinc-100,
+  // Diversos
+  "terminal-bg": $zinc-800,
+  "selection": color.change($magenta-500, $alpha: .2),
+) !default;
+
+$theme-dark: (
+  "content-title": $white,
+  "content-base": color.change($white, $alpha: .72),
+  "content-placeholder": color.change($white, $alpha: .64),
+  "content-primary": $gray-300,
+  "content-brand": $gray-200,
+  "content-on-color": $white,
+  "layout-body": $zinc-800,
+  "layout-surface": $zinc-700,
+  "layout-spotlight": $zinc-600,
+  "layout-brand": $zinc-600,
+  "layout-border": color.change($zinc-400, $alpha: .16),
+  "layout-overlay": color.change($black, $alpha: .48),
+  "interactive-primary": $gray-100,
+  "interactive-primary-hover": $gray-300,
+  "interactive-primary-fg": $gray-800,
+  "interactive-secondary": color.change($zinc-50, $alpha: .08),
+  "interactive-secondary-hover": color.change($zinc-50, $alpha: .16),
+  "interactive-destructive": $red-300,
+  "interactive-destructive-hover": $red-400,
+  "interactive-destructive-fg": $zinc-800,
+  "highlight-focus": $gray-300,
+  "ring-shadow": $gray-500,
+  "promote": $magenta-500,
+  "promote-alt": color.change($magenta-500, $alpha: .24),
+  "promote-fg": $zinc-50,
+  "positive": $green-500,
+  "positive-fg": $green-200,
+  "positive-bg": color.change($green-500, $alpha: .18),
+  "warning": $orange-500,
+  "warning-fg": $orange-200,
+  "warning-bg": color.change($orange-500, $alpha: .18),
+  "negative": $red-600,
+  "negative-fg": $red-300,
+  "negative-bg": color.change($red-600, $alpha: .18),
+  "info": $blue-500,
+  "info-fg": $blue-300,
+  "info-bg": color.change($blue-700, $alpha: .24),
+  "neutral": $zinc-400,
+  "neutral-fg": $white,
+  "neutral-bg": $zinc-600,
+  "terminal-bg": $zinc-900,
+  "selection": color.change($magenta-500, $alpha: .32),
+) !default;
+
+/// Ajustes parciais sem reescrever o tema todo. Ex.: ("promote": #0a7cff).
+$theme-light-overrides: () !default;
+$theme-dark-overrides: () !default;
+
+/// Cores do terminal (iguais nos dois temas, o fundo é sempre escuro).
+$terminal-colors: (
+  "terminal-fg": $zinc-100,
+  "terminal-muted": $zinc-400,
+  "terminal-ok": $green-200,
+  "terminal-prompt": $violet-200,
+  "terminal-error": $red-300,
+) !default;

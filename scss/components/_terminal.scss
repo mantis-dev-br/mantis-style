@@ -1,0 +1,32 @@
+// ============================================================
+// Terminal (saída de comandos)
+// <pre class="terminal"><span class="terminal-prompt">$</span> ls
+// <span class="terminal-ok">ok</span></pre>
+// .term / .ok / .pr são os nomes usados no mpanel.
+// Altura: --ms-terminal-height (padrão 22rem)
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}terminal,
+.#{$prefix}term {
+  height: v(terminal-height, 22rem);
+  padding: space(mini);
+  overflow: auto;
+  overflow-wrap: anywhere;
+  border-radius: radius(md);
+  background: v(terminal-bg);
+  color: v(terminal-fg);
+  font-family: v(font-mono);
+  font-size: .8125rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.#{$prefix}terminal-ok,
+.#{$prefix}term .ok { color: v(terminal-ok); }
+
+.#{$prefix}terminal-prompt,
+.#{$prefix}term .pr { color: v(terminal-prompt); }
+
+.#{$prefix}terminal-error { color: v(terminal-error); }
+.#{$prefix}terminal-muted { color: v(terminal-muted); }

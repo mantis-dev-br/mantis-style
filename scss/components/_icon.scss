@@ -1,0 +1,51 @@
+// ============================================================
+// Ícone (SVG de traço) e ícone em círculo
+// <svg class="icon"><use href="#home"/></svg>
+// <span class="icon-shape icon-shape-positive"><svg class="icon">…</svg></span>
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  &-xs { width: .75rem; height: .75rem; }
+  &-sm { width: 1rem; height: 1rem; }
+  &-lg { width: 1.5rem; height: 1.5rem; }
+  &-xl { width: 2rem; height: 2rem; }
+  &-filled { fill: currentColor; stroke: none; }
+}
+
+.#{$prefix}icon-shape {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: v(interactive-secondary);
+  color: v(content-brand);
+
+  &-sm { width: 2rem; height: 2rem; }
+  &-lg { width: 3rem; height: 3rem; }
+  &-xl { width: 4rem; height: 4rem; }
+  &-square { border-radius: radius(sm); }
+
+  @each $s in $statuses {
+    &-#{$s} {
+      background: v("#{$s}-bg");
+      color: v("#{$s}-fg");
+    }
+  }
+
+  &-promote {
+    background: v(promote-alt);
+    color: v(promote);
+  }
+}

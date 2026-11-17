@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mantis-style · vitrine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../dist/mantis-style.css">
+  <style>
+    .swatch { height: 3rem; border-radius: var(--ms-radius-sm); box-shadow: inset 0 0 0 1px var(--ms-layout-border); }
+    section { scroll-margin-top: 5rem; }
+  </style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21H3z"/><path d="M9 21v-6h6v6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 21h20z"/><path d="M12 10v5M12 18h.01"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6h6l2 2h10v11H3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+</svg>
+
+<div class="app" id="app">
+  <header class="app-header justify-between">
+    <div class="flex items-center gap-micro">
+      <button class="btn btn-ghost btn-icon btn-sm" aria-label="Menu" onclick="toggleNav()">☰</button>
+      <strong class="ts-heading-xs">mantis-style</strong>
+      <span class="tag tag-sm tag-highlight">v1.0</span>
+    </div>
+    <div class="flex items-center gap-nano">
+      <div class="input-group md:hidden" style="width:16rem">
+        <svg class="icon icon-sm"><use href="#i-search"/></svg>
+        <input class="input input-sm" placeholder="Buscar…">
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="toggleTheme()"><svg class="icon icon-sm"><use href="#i-moon"/></svg> Tema</button>
+      <span class="avatar avatar-sm">WR</span>
+    </div>
+  </header>
+
+  <nav class="app-nav">
+    <div class="nav">
+      <p class="nav-heading">Fundamentos</p>
+      <a class="nav-item" aria-current="page" href="#tokens"><svg class="icon"><use href="#i-home"/></svg><span class="nav-label">Tokens</span></a>
+      <a class="nav-item" href="#tipografia"><svg class="icon"><use href="#i-folder"/></svg><span class="nav-label">Tipografia</span></a>
+      <p class="nav-heading">Componentes</p>
+      <a class="nav-item" href="#botoes"><svg class="icon"><use href="#i-check"/></svg><span class="nav-label">Botões</span></a>
+      <a class="nav-item" href="#formularios"><svg class="icon"><use href="#i-mail"/></svg><span class="nav-label">Formulários</span><span class="badge">3</span></a>
+      <a class="nav-item" href="#feedback"><svg class="icon"><use href="#i-alert"/></svg><span class="nav-label">Feedback</span></a>
+      <a class="nav-item" href="#dados"><svg class="icon"><use href="#i-folder"/></svg><span class="nav-label">Dados</span></a>
+      <a class="nav-item" href="#sobreposicoes"><svg class="icon"><use href="#i-home"/></svg><span class="nav-label">Sobreposições</span></a>
+    </div>
+  </nav>
+
+  <main class="app-main p-xs md:p-mini">
+    <div class="flex flex-col gap-xs max-w-page">
+
+      <ol class="breadcrumb"><li><a href="#">Início</a></li><li><a href="#">Docs</a></li><li aria-current="page">Vitrine</li></ol>
+
+      <!-- TOKENS -->
+      <section id="tokens" class="card">
+        <div class="card-header"><h2 class="card-title">Tokens de cor</h2><span class="text-base ts-paragraph-xxxs">mudam com o tema</span></div>
+        <div class="grid grid-cols-6 lg:grid-cols-3 sm:grid-cols-2 gap-micro">
+          <div><div class="swatch bg-body"></div><p class="ts-caption-xxxs text-base mt-nano">layout-body</p></div>
+          <div><div class="swatch bg-surface"></div><p class="ts-caption-xxxs text-base mt-nano">layout-surface</p></div>
+          <div><div class="swatch bg-primary"></div><p class="ts-caption-xxxs text-base mt-nano">interactive-primary</p></div>
+          <div><div class="swatch bg-secondary"></div><p class="ts-caption-xxxs text-base mt-nano">interactive-secondary</p></div>
+          <div><div class="swatch bg-promote"></div><p class="ts-caption-xxxs text-base mt-nano">promote</p></div>
+          <div><div class="swatch bg-brand"></div><p class="ts-caption-xxxs text-base mt-nano">layout-brand</p></div>
+          <div><div class="swatch bg-positive"></div><p class="ts-caption-xxxs text-positive mt-nano">positive</p></div>
+          <div><div class="swatch bg-warning"></div><p class="ts-caption-xxxs text-warning mt-nano">warning</p></div>
+          <div><div class="swatch bg-negative"></div><p class="ts-caption-xxxs text-negative mt-nano">negative</p></div>
+          <div><div class="swatch bg-info"></div><p class="ts-caption-xxxs text-info mt-nano">info</p></div>
+          <div><div class="swatch bg-neutral"></div><p class="ts-caption-xxxs text-base mt-nano">neutral</p></div>
+          <div><div class="swatch bg-promote-alt"></div><p class="ts-caption-xxxs text-base mt-nano">promote-alt</p></div>
+        </div>
+      </section>
+
+      <!-- TIPOGRAFIA -->
+      <section id="tipografia" class="grid cols-2-1 gap-mini">
+        <div class="card flex flex-col gap-nano">
+          <h2 class="card-title mb-nano">Escala tipográfica</h2>
+          <p class="ts-heading-xl">Heading XL</p>
+          <p class="ts-heading-lg">Heading LG</p>
+          <p class="ts-heading-md">Heading MD</p>
+          <p class="ts-subtitle-sm">Subtitle SM</p>
+          <p class="ts-paragraph-xs text-base">Paragraph XS: o texto padrão de leitura.</p>
+          <p class="ts-caption-xxxs text-placeholder">Caption XXXS</p>
+          <p>Código <code>npm run build</code>, atalho <kbd>Ctrl</kbd> + <kbd>K</kbd>, <mark>marcado</mark>, <a class="link" href="#">link</a>.</p>
+        </div>
+        <article class="card prose">
+          <h3>Texto corrido (.prose)</h3>
+          <p>O reboot zera margens e marcadores. Dentro de <strong>.prose</strong>, listas, citações e tabelas voltam ao visual de documento.</p>
+          <ul><li>Primeiro item</li><li>Segundo item</li></ul>
+          <blockquote>Uma citação curta.</blockquote>
+        </article>
+      </section>
+
+      <!-- BOTÕES -->
+      <section id="botoes" class="card">
+        <h2 class="card-title mb-mini">Botões, tags e chips</h2>
+        <div class="flex flex-wrap items-center gap-nano">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-outline">Outline</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-danger">Danger</button>
+          <button class="btn btn-promote">Promote</button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+          <button class="btn btn-primary"><span class="spinner spinner-sm"></span> Salvando</button>
+          <button class="btn btn-outline btn-icon" data-tooltip="Buscar"><svg class="icon"><use href="#i-search"/></svg></button>
+          <a class="btn-link" href="#">Botão link →</a>
+        </div>
+        <div class="flex flex-wrap items-center gap-nano mt-mini">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+          <div class="btn-group"><button class="btn btn-outline">Dia</button><button class="btn btn-outline">Semana</button><button class="btn btn-outline">Mês</button></div>
+        </div>
+        <div class="divider my-mini"></div>
+        <div class="flex flex-wrap items-center gap-nano">
+          <span class="tag">Neutro</span><span class="tag tag-positive">Ativo</span><span class="tag tag-warning">Pendente</span>
+          <span class="tag tag-negative">Erro</span><span class="tag tag-info">Info</span><span class="tag tag-highlight">Novo</span>
+          <span class="tag tag-outline">Outline</span><span class="badge">12</span>
+          <span class="dot dot-positive"></span><span class="dot dot-warning"></span><span class="dot dot-negative"></span>
+        </div>
+        <div class="chip-group mt-mini">
+          <button class="chip" aria-pressed="true">Todos</button><button class="chip">Ativos</button><button class="chip">Pausados</button>
+        </div>
+        <div class="flex flex-wrap gap-mini mt-mini items-center">
+          <div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true">Geral</button><button class="tab" role="tab">DNS</button><button class="tab" role="tab">SSL</button></div>
+          <div class="tabs-line" role="tablist"><button class="tab" role="tab" aria-selected="true">Visão geral</button><button class="tab" role="tab">Logs</button><button class="tab" role="tab">Config.</button></div>
+        </div>
+      </section>
+
+      <!-- FORMULÁRIOS -->
+      <section id="formularios" class="card">
+        <h2 class="card-title mb-mini">Formulários</h2>
+        <div class="grid grid-cols-2 md:grid-cols-1 gap-mini">
+          <div class="field"><label class="label" for="f1" data-required>Domínio</label><input class="input" id="f1" placeholder="exemplo.com.br"><p class="hint">Sem http://</p></div>
+          <div class="field"><label class="label" for="f2">Plano</label><select class="select" id="f2"><option>Básico</option><option>Pro</option></select></div>
+          <div class="field"><label class="label" for="f3">E-mail</label><input class="input" id="f3" aria-invalid="true" value="email@"><p class="hint hint-negative">E-mail inválido.</p></div>
+          <div class="field"><label class="label" for="f4">Busca</label><div class="input-group"><svg class="icon"><use href="#i-search"/></svg><input class="input" id="f4" placeholder="Buscar arquivos"></div></div>
+          <div class="field"><label class="label" for="f5">Desativado</label><input class="input" id="f5" disabled value="Somente leitura"></div>
+          <div class="field"><label class="label" for="f6">Arquivo</label><input class="input" type="file" id="f6"></div>
+          <div class="field col-full"><label class="label" for="f7">Observações</label><textarea class="textarea" id="f7" placeholder="Escreva aqui…"></textarea></div>
+          <div class="field"><label class="label" for="f8">Volume</label><input class="range" type="range" id="f8"></div>
+          <div class="flex flex-wrap gap-mini items-center">
+            <label class="check-label"><input type="checkbox" class="check" checked> Checkbox</label>
+            <label class="check-label"><input type="radio" class="radio" name="r" checked> Radio</label>
+            <label class="check-label"><input type="radio" class="radio" name="r"> Outro</label>
+            <label class="check-label"><input type="checkbox" class="switch" checked> Switch</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEEDBACK -->
+      <section id="feedback" class="grid grid-cols-2 lg:grid-cols-1 gap-mini">
+        <div class="card flex flex-col gap-micro">
+          <h2 class="card-title">Alertas</h2>
+          <div class="alert alert-positive"><svg class="icon"><use href="#i-check"/></svg><div><p class="alert-title">Backup concluído</p><p>Todos os arquivos foram salvos.</p></div></div>
+          <div class="alert alert-warning"><svg class="icon"><use href="#i-alert"/></svg><div><p class="alert-title">Disco em 82%</p><p>Considere liberar espaço.</p></div></div>
+          <div class="alert alert-negative"><svg class="icon"><use href="#i-x"/></svg><p>Falha ao renovar o certificado.</p></div>
+          <div class="alert alert-info"><p>Manutenção agendada para domingo.</p></div>
+        </div>
+        <div class="card flex flex-col gap-micro">
+          <h2 class="card-title">Progresso e carregamento</h2>
+          <div class="progress"><span style="width:40%"></span></div>
+          <div class="progress is-warning"><span style="width:72%"></span></div>
+          <div class="progress is-negative progress-lg"><span style="width:91%"></span></div>
+          <div class="progress progress-indeterminate progress-sm"><span></span></div>
+          <div class="flex gap-micro items-center"><div class="skeleton skeleton-circle"></div><div class="flex-1 flex flex-col gap-nano"><div class="skeleton skeleton-text w-full"></div><div class="skeleton skeleton-text w-half"></div></div></div>
+          <div class="empty"><span class="icon-shape icon-shape-lg"><svg class="icon"><use href="#i-folder"/></svg></span><p class="empty-title">Nenhum arquivo</p><p class="empty-text">Envie arquivos para vê-los aqui.</p><button class="btn btn-primary btn-sm mt-nano">Enviar</button></div>
+        </div>
+      </section>
+
+      <!-- DADOS -->
+      <section id="dados" class="card card-flush">
+        <div class="p-xxxs flex justify-between items-center"><h2 class="card-title">Tabela</h2><div class="avatar-group"><span class="avatar avatar-sm">AL</span><span class="avatar avatar-sm">BR</span><span class="avatar avatar-sm">CS</span></div></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Domínio</th><th>Status</th><th class="text-right">Uso</th></tr></thead>
+            <tbody>
+              <tr><td>mantis.com.br</td><td><span class="tag tag-positive">Ativo</span></td><td class="text-right">2,4 GB</td></tr>
+              <tr><td>loja.mantis.com.br</td><td><span class="tag tag-warning">Pendente</span></td><td class="text-right">812 MB</td></tr>
+              <tr><td>api.mantis.com.br</td><td><span class="tag tag-negative">Erro</span></td><td class="text-right">96 MB</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="p-xxxs flex justify-between items-center border-t">
+          <span class="text-base ts-paragraph-xxxs">3 de 24</span>
+          <nav class="pagination"><button class="page-btn" disabled>‹</button><button class="page-btn" aria-current="page">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">›</button></nav>
+        </div>
+      </section>
+
+      <section class="grid cols-1-2 gap-mini">
+        <div class="card flex flex-col gap-micro">
+          <h2 class="card-title">Lista e acordeão</h2>
+          <div class="list">
+            <div class="list-row"><span class="icon-shape icon-shape-positive"><svg class="icon"><use href="#i-check"/></svg></span><div class="flex-1"><p class="ts-subtitle-xxs truncate">SSL renovado</p><p class="ts-paragraph-xxxs text-base">há 2 horas</p></div></div>
+            <div class="list-row"><span class="icon-shape icon-shape-warning"><svg class="icon"><use href="#i-alert"/></svg></span><div class="flex-1"><p class="ts-subtitle-xxs truncate">Cota de e-mail</p><p class="ts-paragraph-xxxs text-base">ontem</p></div></div>
+          </div>
+          <div class="accordion">
+            <details class="accordion-item" open><summary>Como mudo o tema?</summary><div>Use data-theme="dark" no &lt;html&gt;.</div></details>
+            <details class="accordion-item"><summary>Precisa de JavaScript?</summary><div>Não: o acordeão usa &lt;details&gt;.</div></details>
+          </div>
+        </div>
+        <div class="card flex flex-col gap-micro">
+          <h2 class="card-title">Terminal</h2>
+          <pre class="terminal" style="--ms-terminal-height: 12rem"><span class="terminal-prompt">mantis@host:~$</span> npm run build
+<span class="terminal-muted">&gt; sass scss/mantis-style.scss dist/mantis-style.css</span>
+<span class="terminal-ok">✔ compilado em 412ms</span>
+<span class="terminal-error">✖ 0 erros</span></pre>
+        </div>
+      </section>
+
+      <!-- SOBREPOSIÇÕES -->
+      <section id="sobreposicoes" class="card">
+        <h2 class="card-title mb-mini">Sobreposições</h2>
+        <div class="flex flex-wrap gap-nano items-start">
+          <button class="btn btn-primary" onclick="document.getElementById('dlg').showModal()">Abrir modal</button>
+          <button class="btn btn-outline" onclick="toggle('drawer')">Abrir drawer</button>
+          <button class="btn btn-outline" onclick="toast()">Mostrar toast</button>
+          <div class="dropdown">
+            <button class="btn btn-outline" onclick="toggle('menu')">Menu ▾</button>
+            <div class="menu hidden" id="menu" role="menu">
+              <p class="menu-label">Conta</p>
+              <button class="menu-item" role="menuitem">Perfil <span class="menu-shortcut">⌘P</span></button>
+              <button class="menu-item" role="menuitem">Faturamento</button>
+              <div class="menu-sep"></div>
+              <button class="menu-item menu-item-danger" role="menuitem">Sair</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<dialog class="modal" id="dlg">
+  <div class="modal-header"><h2 class="modal-title">Excluir domínio</h2><button class="btn btn-ghost btn-icon btn-sm" aria-label="Fechar" onclick="dlg.close()"><svg class="icon"><use href="#i-x"/></svg></button></div>
+  <div class="modal-body"><p class="text-base">Tem certeza? Essa ação não pode ser desfeita.</p></div>
+  <div class="modal-footer"><button class="btn btn-outline" onclick="dlg.close()">Cancelar</button><button class="btn btn-danger" onclick="dlg.close()">Excluir</button></div>
+</dialog>
+
+<div id="drawer" class="hidden">
+  <div class="overlay" onclick="toggle('drawer')"></div>
+  <aside class="drawer">
+    <div class="drawer-header"><h2 class="ts-heading-xs">Notificações</h2><button class="btn btn-ghost btn-icon btn-sm" aria-label="Fechar" onclick="toggle('drawer')"><svg class="icon"><use href="#i-x"/></svg></button></div>
+    <div class="drawer-body"><ul class="list-divided"><li>Backup concluído</li><li>Novo login detectado</li><li>Fatura disponível</li></ul></div>
+  </aside>
+</div>
+
+<ol class="toasts" id="toasts"></ol>
+
+<script>
+  const html = document.documentElement;
+  function toggleTheme() { html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark'; }
+  function toggleNav() {
+    const app = document.getElementById('app');
+    if (matchMedia('(max-width: 1023.98px)').matches) app.toggleAttribute('data-nav-open');
+    else app.toggleAttribute('data-collapsed');
+  }
+  function toggle(id) { document.getElementById(id).classList.toggle('hidden'); }
+  function toast() {
+    const li = document.createElement('li');
+    li.className = 'toast toast-positive';
+    li.setAttribute('role', 'status');
+    li.innerHTML = '<svg class="icon"><use href="#i-check"/></svg><div><p class="toast-title">Salvo</p><p class="toast-text">Alterações gravadas.</p></div>';
+    document.getElementById('toasts').append(li);
+    setTimeout(() => li.remove(), 3000);
+  }
+  if (new URLSearchParams(location.search).has('dark')) html.dataset.theme = 'dark';
+</script>
+</body>
+</html>

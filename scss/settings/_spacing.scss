@@ -1,0 +1,20 @@
+// ============================================================
+// Espaçamento nomeado
+// none 0 · quark 4 · nano 8 · micro 12 · mini 16 · xxxs 20
+// xxs 24 · xs 32 · sm 40 · md 48 · lg 64 · xl 80   (px)
+// ============================================================
+
+$spacers: (
+  "none": 0,
+  "quark": .25rem,
+  "nano": .5rem,
+  "micro": .75rem,
+  "mini": 1rem,
+  "xxxs": 1.25rem,
+  "xxs": 1.5rem,
+  "xs": 2rem,
+  "sm": 2.5rem,
+  "md": 3rem,
+  "lg": 4rem,
+  "xl": 5rem,
+) !default;

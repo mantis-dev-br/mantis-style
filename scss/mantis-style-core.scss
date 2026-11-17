@@ -1,0 +1,10 @@
+/*!
+ * mantis-style core v1.0.0
+ * Só tokens (variáveis CSS), temas, reboot e animações. Sem classes.
+ * Copyright (c) 2026 mantis-dev-br. Todos os direitos reservados. Ver LICENSE.
+ */
+
+// Use quando o projeto tem seus próprios componentes e só quer a base visual.
+@forward "tools";
+
+@use "base";

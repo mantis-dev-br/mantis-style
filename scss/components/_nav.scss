@@ -1,0 +1,57 @@
+// ============================================================
+// Navegação lateral
+// <nav class="nav">
+//   <p class="nav-heading">Geral</p>
+//   <a class="nav-item" aria-current="page"><svg class="icon">…</svg><span class="nav-label">Início</span></a>
+// </nav>
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}nav {
+  display: flex;
+  flex-direction: column;
+  gap: space(quark);
+}
+
+.#{$prefix}nav-heading {
+  margin: space(mini) 0 space(quark);
+  padding: 0 space(micro);
+  @include type(heading-xxxs);
+  color: v(content-placeholder);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+
+  &:first-child { margin-top: 0; }
+}
+
+.#{$prefix}nav-item {
+  display: flex;
+  align-items: center;
+  gap: space(nano);
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 space(micro);
+  border-radius: radius(sm);
+  color: v(content-base);
+  font-size: .875rem;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+  @include transition((background-color, color));
+
+  &:hover { background: v(interactive-secondary); }
+
+  &[aria-current="page"],
+  &.is-active {
+    background: v(interactive-secondary);
+    color: v(content-title);
+    font-weight: 500;
+  }
+
+  .#{$prefix}badge { margin-left: auto; }
+}
+
+.#{$prefix}nav-label {
+  min-width: 0;
+  @include truncate;
+}

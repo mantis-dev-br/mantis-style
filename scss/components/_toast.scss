@@ -1,0 +1,68 @@
+// ============================================================
+// Toasts (avisos temporários)
+// <ol class="toasts">
+//   <li class="toast toast-positive" role="status">
+//     <svg class="icon">…</svg>
+//     <div><p class="toast-title">Salvo</p><p class="toast-text">Alterações gravadas.</p></div>
+//   </li>
+// </ol>
+// No mobile ficam embaixo e no centro; a partir de 640px, no canto superior direito.
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}toasts {
+  position: fixed;
+  bottom: space(mini);
+  left: 50%;
+  z-index: z(toast);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: space(mini);
+  width: 100%;
+  padding: 0 space(nano);
+  list-style: none;
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  > * { pointer-events: auto; }
+
+  @include media-up(sm) {
+    top: space(mini);
+    right: space(mini);
+    bottom: auto;
+    left: auto;
+    width: 23.75rem;
+    padding: 0;
+    transform: none;
+  }
+}
+
+.#{$prefix}toast {
+  display: flex;
+  align-items: flex-start;
+  gap: space(micro);
+  padding: space(mini);
+  border: 1px solid v(layout-border);
+  border-radius: radius(md);
+  background: v(layout-surface);
+  color: v(content-title);
+  box-shadow: shadow(level4);
+  animation: kf(pop) $duration-base $easing;
+
+  @each $s in $statuses {
+    &-#{$s} {
+      box-shadow: inset 3px 0 0 v($s), shadow(level4);
+      > .#{$prefix}icon { color: v($s); }
+    }
+  }
+}
+
+.#{$prefix}toast-title {
+  font-weight: 600;
+  font-size: .875rem;
+}
+
+.#{$prefix}toast-text {
+  color: v(content-base);
+  font-size: .875rem;
+}

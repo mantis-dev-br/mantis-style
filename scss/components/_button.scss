@@ -1,0 +1,117 @@
+// ============================================================
+// Botões
+// <button class="btn btn-primary">Salvar</button>
+// Variantes: primary, secondary, outline, ghost, danger, promote
+// Tamanhos: btn-sm, btn-lg · Formas: btn-icon, btn-block
+// Grupo: <div class="btn-group">…</div> · Link: .btn-link
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: space(nano);
+  height: control-height(md);
+  padding: 0 space(xxs);
+  border-radius: radius(sm);
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+  @include transition((background-color, color, box-shadow, opacity));
+  @include disabled-state;
+
+  &[aria-disabled="true"],
+  &.is-disabled { pointer-events: none; }
+
+  // Tamanhos
+  &-sm { height: control-height(sm); padding: 0 space(micro); }
+  &-lg { height: control-height(lg); padding: 0 space(xs); font-size: 1rem; }
+  &-block { width: 100%; }
+
+  // Variantes
+  &-primary {
+    background: v(interactive-primary);
+    color: v(interactive-primary-fg);
+    &:hover:not(:disabled) { background: v(interactive-primary-hover); }
+  }
+
+  &-secondary {
+    background: v(interactive-secondary);
+    color: v(content-title);
+    &:hover:not(:disabled) { background: v(interactive-secondary-hover); }
+  }
+
+  &-outline {
+    box-shadow: inset 0 0 0 1px v(layout-border);
+    color: v(content-primary);
+    &:hover:not(:disabled) { background: v(interactive-secondary); }
+  }
+
+  &-ghost {
+    color: v(content-base);
+    font-weight: 400;
+    &:hover:not(:disabled) {
+      background: v(interactive-secondary);
+      color: v(content-title);
+    }
+  }
+
+  &-danger {
+    background: v(interactive-destructive);
+    color: v(interactive-destructive-fg);
+    &:hover:not(:disabled) { background: v(interactive-destructive-hover); }
+  }
+
+  &-promote {
+    background: v(promote);
+    color: v(promote-fg);
+    &:hover:not(:disabled) { filter: brightness(.92); }
+  }
+
+  // Botão só com ícone (quadrado)
+  &-icon {
+    width: control-height(md);
+    padding: 0;
+    &.#{$prefix}btn-sm { width: control-height(sm); }
+    &.#{$prefix}btn-lg { width: control-height(lg); }
+  }
+
+  &-pill { border-radius: radius(pill); }
+
+  // Visual de link, sem altura de botão
+  &-link {
+    display: inline-flex;
+    align-items: center;
+    gap: space(quark);
+    color: v(content-primary);
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    cursor: pointer;
+    @include transition((color));
+    &:hover { color: v(content-base); }
+  }
+}
+
+// Botões encostados
+.#{$prefix}btn-group {
+  display: inline-flex;
+
+  > .#{$prefix}btn:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  > .#{$prefix}btn:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  > .#{$prefix}btn-outline + .#{$prefix}btn-outline { margin-left: -1px; }
+}

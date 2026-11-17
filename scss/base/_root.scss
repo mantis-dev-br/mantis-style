@@ -1,0 +1,50 @@
+// ============================================================
+// Variáveis CSS (tokens) e temas claro/escuro
+// Tema: <html data-theme="light|dark">. Sem o atributo, segue o
+// sistema operacional (se $enable-auto-dark-mode estiver ligado).
+// ============================================================
+@use "sass:map";
+@use "sass:meta";
+@use "../tools" as *;
+
+$_light: map.merge($theme-light, $theme-light-overrides);
+$_dark: map.merge($theme-dark, $theme-dark-overrides);
+$_attr: $theme-attribute;
+
+// Tokens que não mudam com o tema
+:root {
+  --#{$var-prefix}font-sans: #{meta.inspect($font-sans)};
+  --#{$var-prefix}font-mono: #{meta.inspect($font-mono)};
+  @include css-vars($radii, "radius-");
+  @include css-vars($shadows, "shadow-");
+  @include css-vars($terminal-colors);
+  --#{$var-prefix}duration-fast: #{$duration-fast};
+  --#{$var-prefix}duration-base: #{$duration-base};
+}
+
+// Tema claro (padrão)
+:root,
+[#{$_attr}="light"] {
+  @include css-vars($_light);
+  color-scheme: light;
+}
+
+@if $enable-dark-mode {
+  // Tema escuro pelo sistema operacional
+  @if $enable-auto-dark-mode {
+    @media (prefers-color-scheme: dark) {
+      :root:not([#{$_attr}="light"]) {
+        @include css-vars($_dark);
+        @include css-vars($shadows-dark, "shadow-");
+        color-scheme: dark;
+      }
+    }
+  }
+
+  // Tema escuro explícito
+  [#{$_attr}="dark"] {
+    @include css-vars($_dark);
+    @include css-vars($shadows-dark, "shadow-");
+    color-scheme: dark;
+  }
+}

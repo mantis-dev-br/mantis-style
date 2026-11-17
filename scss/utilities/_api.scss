@@ -1,0 +1,297 @@
+// ============================================================
+// Gerador de utilidades
+//
+// Cada grupo do mapa $utilities vira um conjunto de classes:
+//   "padding": (property: padding, class: p, values: $spacers, responsive: true)
+//   => .p-none, .p-quark, …  e  .lg\:p-mini, .md\:p-mini, .sm\:p-mini
+//
+// Chaves de cada grupo:
+//   property   propriedade CSS (ou lista de propriedades)
+//   class      prefixo da classe. "" usa só a chave do valor (ex.: .flex)
+//   values     mapa nome => valor. O valor pode ser um mapa de propriedades.
+//   responsive gera as variantes por breakpoint (desktop-first)
+//   important  adiciona !important
+//
+// Para adicionar grupos: @use "mantis-style" with ($utilities-extra: (...));
+// Para remover grupos:   @use "mantis-style" with ($utilities-disabled: ("opacity"));
+// ============================================================
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+@use "../tools" as *;
+
+// ---------- Mapas de valores ----------
+@function _token-map($names, $token-prefix: "", $token-suffix: "") {
+  $map: ();
+  @each $name in $names {
+    $map: map.merge($map, ($name: v("#{$token-prefix}#{$name}#{$token-suffix}")));
+  }
+  @return $map;
+}
+
+@function _scale-map($source, $fn) {
+  $map: ();
+  @each $key, $_ in $source {
+    $map: map.merge($map, ($key: meta.call($fn, $key)));
+  }
+  @return $map;
+}
+
+$_type: ();
+@each $name, $t in $type-scale {
+  $_type: map.merge($_type, ($name: (
+    font-weight: list.nth($t, 1),
+    font-size: list.nth($t, 2),
+    line-height: list.nth($t, 3),
+  )));
+}
+
+$_cols: ();
+$_spans: ();
+@for $i from 1 through 12 {
+  $_cols: map.merge($_cols, ($i: string.unquote("repeat(#{$i}, minmax(0, 1fr))")));
+  $_spans: map.merge($_spans, ($i: string.unquote("span #{$i} / span #{$i}")));
+}
+$_spans: map.merge($_spans, ("full": string.unquote("1 / -1")));
+
+$_text-colors: map.merge(
+  (
+    "title": v(content-title),
+    "base": v(content-base),
+    "placeholder": v(content-placeholder),
+    "primary": v(content-primary),
+    "brand": v(content-brand),
+    "on-color": v(content-on-color),
+    "promote": v(promote),
+    "inherit": inherit,
+    "current": currentColor,
+  ),
+  _token-map($statuses, "", "-fg")
+);
+
+$_bg-colors: map.merge(
+  (
+    "body": v(layout-body),
+    "surface": v(layout-surface),
+    "spotlight": v(layout-spotlight),
+    "brand": v(layout-brand),
+    "primary": v(interactive-primary),
+    "secondary": v(interactive-secondary),
+    "promote": v(promote),
+    "promote-alt": v(promote-alt),
+    "neutral": v(neutral-bg),
+    "transparent": transparent,
+  ),
+  _token-map($statuses, "", "-bg")
+);
+
+$_border-colors: map.merge(
+  (
+    "default": v(layout-border),
+    "secondary": v(interactive-secondary),
+    "primary": v(interactive-primary),
+    "promote": v(promote),
+    "transparent": transparent,
+  ),
+  _token-map($statuses)
+);
+
+$_spacers-auto: map.merge($spacers, ("auto": auto));
+$_radii: _scale-map($radii, meta.get-function("radius"));
+$_shadows: map.merge(
+  _scale-map($shadows, meta.get-function("shadow")),
+  ("none": none)
+);
+$_z: map.merge($z-index, ("10": 10, "20": 20, "auto": auto));
+
+// ---------- Grupos ----------
+$utilities: (
+  // Tipografia
+  "type-scale": (class: "ts", values: $_type, responsive: true),
+  "font-family": (property: font-family, class: "font", values: ("sans": v(font-sans), "mono": v(font-mono))),
+  "font-weight": (property: font-weight, class: "font", values: $font-weights),
+  "text-align": (property: text-align, class: "text", values: ("left": left, "center": center, "right": right, "justify": justify, "start": start, "end": end), responsive: true),
+  "text-color": (property: color, class: "text", values: $_text-colors),
+  "text-transform": (property: text-transform, class: "", values: ("uppercase": uppercase, "lowercase": lowercase, "capitalize": capitalize, "normal-case": none)),
+  "font-style": (property: font-style, class: "", values: ("italic": italic, "not-italic": normal)),
+  "text-decoration": (property: text-decoration-line, class: "", values: ("underline": underline, "line-through": line-through, "no-underline": none)),
+  "white-space": (property: white-space, class: "whitespace", values: ("normal": normal, "nowrap": nowrap, "pre": pre, "pre-wrap": pre-wrap)),
+  "word-break": (class: "break", values: ("words": (overflow-wrap: anywhere), "all": (word-break: break-all), "normal": (overflow-wrap: normal, word-break: normal))),
+  "line-height": (property: line-height, class: "leading", values: ("none": 1, "tight": 1.2, "snug": 1.33, "normal": 1.5, "relaxed": 1.7)),
+  "letter-spacing": (property: letter-spacing, class: "tracking", values: ("tight": -.01em, "normal": 0, "wide": .02em, "wider": .04em)),
+  "numeric": (property: font-variant-numeric, class: "", values: ("tabular-nums": tabular-nums, "normal-nums": normal)),
+
+  // Cores e bordas
+  "background": (property: background-color, class: "bg", values: $_bg-colors),
+  "border-color": (property: border-color, class: "border", values: $_border-colors),
+  "border-width": (class: "border", values: (
+    "": (border-width: 1px),
+    "0": (border-width: 0),
+    "1": (border-width: 1px),
+    "2": (border-width: 2px),
+    "t": (border-top-width: 1px),
+    "r": (border-right-width: 1px),
+    "b": (border-bottom-width: 1px),
+    "l": (border-left-width: 1px),
+  )),
+  "rounded": (property: border-radius, class: "rounded", values: $_radii),
+
+  // Espaçamento
+  "padding": (property: padding, class: "p", values: $spacers, responsive: true),
+  "padding-x": (property: padding-inline, class: "px", values: $spacers, responsive: true),
+  "padding-y": (property: padding-block, class: "py", values: $spacers, responsive: true),
+  "padding-top": (property: padding-top, class: "pt", values: $spacers, responsive: true),
+  "padding-right": (property: padding-right, class: "pr", values: $spacers, responsive: true),
+  "padding-bottom": (property: padding-bottom, class: "pb", values: $spacers, responsive: true),
+  "padding-left": (property: padding-left, class: "pl", values: $spacers, responsive: true),
+  "margin": (property: margin, class: "m", values: $_spacers-auto, responsive: true),
+  "margin-x": (property: margin-inline, class: "mx", values: $_spacers-auto, responsive: true),
+  "margin-y": (property: margin-block, class: "my", values: $_spacers-auto, responsive: true),
+  "margin-top": (property: margin-top, class: "mt", values: $_spacers-auto, responsive: true),
+  "margin-right": (property: margin-right, class: "mr", values: $_spacers-auto, responsive: true),
+  "margin-bottom": (property: margin-bottom, class: "mb", values: $_spacers-auto, responsive: true),
+  "margin-left": (property: margin-left, class: "ml", values: $_spacers-auto, responsive: true),
+  "gap": (property: gap, class: "gap", values: $spacers, responsive: true),
+  "gap-x": (property: column-gap, class: "gap-x", values: $spacers, responsive: true),
+  "gap-y": (property: row-gap, class: "gap-y", values: $spacers, responsive: true),
+
+  // Display (com !important para .hidden vencer componentes e JS)
+  "display": (property: display, class: "", important: true, responsive: true, values: (
+    "block": block,
+    "inline": inline,
+    "inline-block": inline-block,
+    "flex": flex,
+    "inline-flex": inline-flex,
+    "grid": grid,
+    "inline-grid": inline-grid,
+    "contents": contents,
+    "hidden": none,
+  )),
+
+  // Flexbox
+  "flex-direction": (property: flex-direction, class: "flex", responsive: true, values: ("row": row, "col": column, "row-reverse": row-reverse, "col-reverse": column-reverse)),
+  "flex-wrap": (property: flex-wrap, class: "flex", responsive: true, values: ("wrap": wrap, "nowrap": nowrap)),
+  "flex": (class: "flex", values: ("1": (flex: 1 1 0%, min-width: 0), "auto": (flex: 1 1 auto), "none": (flex: none))),
+  "grow": (property: flex-grow, class: "", values: ("grow": 1, "grow-0": 0)),
+  "shrink": (property: flex-shrink, class: "", values: ("shrink": 1, "shrink-0": 0)),
+  "align-items": (property: align-items, class: "items", responsive: true, values: ("start": flex-start, "center": center, "end": flex-end, "baseline": baseline, "stretch": stretch)),
+  "justify-content": (property: justify-content, class: "justify", responsive: true, values: ("start": flex-start, "center": center, "end": flex-end, "between": space-between, "around": space-around, "evenly": space-evenly)),
+  "align-self": (property: align-self, class: "self", values: ("auto": auto, "start": flex-start, "center": center, "end": flex-end, "stretch": stretch)),
+  "place-items": (property: place-items, class: "place-items", values: ("center": center, "start": start, "end": end)),
+  "order": (property: order, class: "order", responsive: true, values: ("first": -9999, "last": 9999, "none": 0)),
+
+  // Grid
+  "grid-cols": (property: grid-template-columns, class: "grid-cols", values: $_cols, responsive: true),
+  "col-span": (property: grid-column, class: "col-span", values: $_spans, responsive: true),
+
+  // Tamanho
+  "width": (property: width, class: "w", responsive: true, values: ("full": 100%, "auto": auto, "fit": fit-content, "half": 50%, "screen": 100vw)),
+  "height": (property: height, class: "h", values: ("full": 100%, "auto": auto, "screen": 100vh, "dvh": 100dvh)),
+  "min-width": (property: min-width, class: "min-w", values: ("0": 0, "full": 100%)),
+  "min-height": (property: min-height, class: "min-h", values: ("0": 0, "full": 100%, "screen": 100vh)),
+  "max-width": (property: max-width, class: "max-w", values: (
+    "page": $container-max-width,
+    "prose": 72ch,
+    "sm": 24rem,
+    "md": 37.5rem,
+    "lg": 50rem,
+    "xl": 72rem,
+    "full": 100%,
+    "none": none,
+  )),
+
+  // Posição
+  "position": (class: "", responsive: true, values: (
+    "static": (position: static),
+    "relative": (position: relative),
+    "absolute": (position: absolute),
+    "fixed": (position: fixed),
+    "sticky": (position: sticky, top: 0),
+  )),
+  "inset": (class: "", values: (
+    "inset-0": (inset: 0),
+    "top-0": (top: 0),
+    "right-0": (right: 0),
+    "bottom-0": (bottom: 0),
+    "left-0": (left: 0),
+  )),
+  "z-index": (property: z-index, class: "z", values: $_z),
+  "overflow": (property: overflow, class: "overflow", values: ("auto": auto, "hidden": hidden, "visible": visible, "scroll": scroll)),
+  "overflow-x": (property: overflow-x, class: "overflow-x", values: ("auto": auto, "hidden": hidden)),
+  "overflow-y": (property: overflow-y, class: "overflow-y", values: ("auto": auto, "hidden": hidden)),
+
+  // Efeitos
+  "shadow": (property: box-shadow, class: "shadow", values: $_shadows),
+  "opacity": (property: opacity, class: "opacity", values: ("0": 0, "48": .48, "64": .64, "72": .72, "100": 1)),
+  "cursor": (property: cursor, class: "cursor", values: ("pointer": pointer, "default": default, "not-allowed": not-allowed, "help": help, "grab": grab)),
+  "pointer-events": (property: pointer-events, class: "pointer-events", values: ("none": none, "auto": auto)),
+  "user-select": (property: user-select, class: "select", values: ("none": none, "text": text, "all": all)),
+  "visibility": (property: visibility, class: "", values: ("visible": visible, "invisible": hidden)),
+  "object-fit": (property: object-fit, class: "object", values: ("cover": cover, "contain": contain)),
+  "aspect-ratio": (property: aspect-ratio, class: "aspect", values: ("square": string.unquote("1 / 1"), "video": string.unquote("16 / 9"))),
+);
+
+$utilities: map.merge($utilities, $utilities-extra);
+@each $name in $utilities-disabled {
+  $utilities: map.remove($utilities, $name);
+}
+
+// ---------- Geração ----------
+@mixin _declare($prop, $value, $important) {
+  @if $important {
+    #{$prop}: $value !important;
+  } @else {
+    #{$prop}: $value;
+  }
+}
+
+@mixin generate-utility($utility, $infix: "") {
+  $class: map.get($utility, class);
+  $props: map.get($utility, property);
+  $important: map.get($utility, important) == true or $enable-important-utilities;
+
+  @each $key, $value in map.get($utility, values) {
+    $name: $key;
+    @if $class != null and $class != "" {
+      @if $key == "" {
+        $name: $class;
+      } @else {
+        $name: "#{$class}-#{$key}";
+      }
+    }
+
+    .#{$infix}#{$prefix}#{$name} {
+      @if meta.type-of($value) == "map" {
+        @each $prop, $v in $value {
+          @include _declare($prop, $v, $important);
+        }
+      } @else {
+        @each $prop in $props {
+          @include _declare($prop, $value, $important);
+        }
+      }
+    }
+  }
+}
+
+// Base (todas as telas)
+@each $_, $utility in $utilities {
+  @include generate-utility($utility);
+}
+
+// Responsivas, do maior breakpoint para o menor (desktop-first):
+// md: vence lg: em telas pequenas porque vem depois.
+@if $enable-responsive-utilities {
+  $_bps: map.keys($breakpoints);
+  @for $i from list.length($_bps) through 1 {
+    $bp: list.nth($_bps, $i);
+    @include media-down($bp) {
+      @each $_, $utility in $utilities {
+        @if map.get($utility, responsive) == true {
+          @include generate-utility($utility, "#{$bp}\\:");
+        }
+      }
+    }
+  }
+}

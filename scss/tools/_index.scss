@@ -1,0 +1,7 @@
+// Configurações + funções + mixins. Não gera CSS.
+// Use no seu projeto para acessar tokens e mixins:
+//   @use "mantis-style/scss/tools" as ms;
+//   .meu-card { padding: ms.space(mini); color: ms.v(content-title); }
+@forward "../settings";
+@forward "functions";
+@forward "mixins";

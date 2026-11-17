@@ -1,0 +1,26 @@
+/*!
+ * mantis-style v1.0.0
+ * Design system Mantis em SCSS: tokens, reboot, layout, componentes e utilidades.
+ * Tema: <html data-theme="light|dark">
+ * Copyright (c) 2026 mantis-dev-br. Todos os direitos reservados. Ver LICENSE.
+ */
+
+// Arquivo de import principal: carrega tudo.
+//
+//   @use "mantis-style/scss/mantis-style";
+//
+// Com configuração:
+//   @use "mantis-style/scss/mantis-style" as ms with (
+//     $prefix: "ms-",
+//     $theme-light-overrides: ("promote": #0a7cff),
+//   );
+//
+// Expõe também os tokens, funções e mixins: ms.v(content-title), ms.space(mini),
+// @include ms.media-down(md) { … }
+
+@forward "tools";
+
+@use "base";
+@use "layout";
+@use "components";
+@use "utilities";

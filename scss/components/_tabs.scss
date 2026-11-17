@@ -1,0 +1,78 @@
+// ============================================================
+// Abas
+// Segmentadas: <div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true">…</button></div>
+// Sublinhadas: <div class="tabs-line" role="tablist">…mesmos .tab…</div>
+// ============================================================
+@use "../tools" as *;
+
+$_p: $prefix;
+
+.#{$_p}tabs {
+  display: inline-flex;
+  gap: space(quark);
+  max-width: 100%;
+  padding: space(quark);
+  overflow-x: auto;
+  border-radius: radius(sm);
+  background: v(interactive-secondary);
+  scrollbar-width: none;
+}
+
+.#{$_p}tab {
+  display: inline-flex;
+  align-items: center;
+  gap: space(nano);
+  height: control-height(md);
+  padding: 0 space(mini);
+  border-radius: radius(sm);
+  color: v(content-title);
+  font-size: .875rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  @include transition((background-color, color, box-shadow));
+  @include disabled-state;
+
+  &:hover:not([aria-selected="true"]):not(.is-active):not(:disabled) {
+    background: v(interactive-secondary-hover);
+  }
+
+  &[aria-selected="true"],
+  &.is-active {
+    background: v(interactive-primary);
+    color: v(interactive-primary-fg);
+  }
+}
+
+.#{$_p}tabs-line {
+  display: flex;
+  gap: space(xxs);
+  max-width: 100%;
+  overflow-x: auto;
+  border-bottom: 1px solid v(layout-border);
+  scrollbar-width: none;
+
+  .#{$_p}tab {
+    height: 2.75rem;
+    padding: 0 space(quark);
+    border-radius: 0;
+    background: none;
+    color: v(content-base);
+    box-shadow: inset 0 -2px 0 transparent;
+
+    &:hover:not(:disabled) {
+      background: none;
+      color: v(content-title);
+    }
+
+    &[aria-selected="true"],
+    &.is-active {
+      background: none;
+      color: v(content-title);
+      font-weight: 500;
+      box-shadow: inset 0 -2px 0 v(interactive-primary);
+    }
+  }
+}
+
+.#{$_p}tab-panel { padding-top: space(mini); }

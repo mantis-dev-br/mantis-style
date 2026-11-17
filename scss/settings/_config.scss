@@ -1,0 +1,35 @@
+// ============================================================
+// Configuração geral
+// Tudo aqui é !default. Para mudar, configure na importação:
+//   @use "mantis-style" with ($prefix: "ms-", $enable-auto-dark-mode: false);
+// ============================================================
+
+/// Prefixo das classes. "" gera .btn; "ms-" gera .ms-btn.
+$prefix: "" !default;
+
+/// Prefixo das variáveis CSS e das animações. "ms-" gera --ms-content-title.
+$var-prefix: "ms-" !default;
+
+/// Atributo do <html> que escolhe o tema: data-theme="light" | "dark".
+$theme-attribute: "data-theme" !default;
+
+/// Gera o tema escuro.
+$enable-dark-mode: true !default;
+
+/// Sem o atributo de tema no <html>, segue a preferência do sistema operacional.
+$enable-auto-dark-mode: true !default;
+
+/// Reduz transições e animações para quem pede menos movimento.
+$enable-reduced-motion: true !default;
+
+/// Gera as variantes responsivas das utilidades (md:p-mini, lg:hidden...).
+$enable-responsive-utilities: true !default;
+
+/// Força !important em todas as utilidades (como o Bootstrap).
+$enable-important-utilities: false !default;
+
+/// Utilidades extras, no mesmo formato de utilities/_api.scss.
+$utilities-extra: () !default;
+
+/// Nomes de grupos de utilidades que não devem ser gerados. Ex.: ("opacity", "z-index").
+$utilities-disabled: () !default;

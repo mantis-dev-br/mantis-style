@@ -1,0 +1,56 @@
+LICENÇA PROPRIETÁRIA — TODOS OS DIREITOS RESERVADOS
+
+Copyright (c) 2026 mantis-dev-br. Todos os direitos reservados.
+
+1. Titularidade
+O mantis-style e todos os seus arquivos, incluindo código-fonte SCSS, CSS
+compilado, documentação, exemplos e demais materiais deste repositório
+(o "Software"), são de propriedade exclusiva de mantis-dev-br (o "Titular"),
+protegidos pela Lei nº 9.610/1998 (Direitos Autorais), pela Lei nº 9.609/1998
+(Programa de Computador) e pelos tratados internacionais aplicáveis.
+
+2. Publicação apenas para consulta
+O Software está disponível publicamente somente para visualização. A
+publicação do código não concede nenhuma licença, cessão ou autorização de
+uso, expressa ou implícita.
+
+3. Proibições
+Sem autorização prévia e por escrito do Titular, é proibido:
+  a) usar o Software, no todo ou em parte, em qualquer projeto, produto,
+     site, aplicativo ou serviço, comercial ou não;
+  b) copiar, reproduzir, modificar, adaptar, traduzir ou criar obras
+     derivadas do Software;
+  c) distribuir, publicar, sublicenciar, vender, alugar ou disponibilizar o
+     Software a terceiros, por qualquer meio;
+  d) remover ou alterar avisos de direitos autorais ou esta licença.
+
+4. Exceção da plataforma
+Visualizar o repositório e criar um fork pelas funções do GitHub são
+permitidos apenas na medida exigida pelos Termos de Serviço do GitHub. Isso
+não concede nenhum outro direito, inclusive o de usar ou distribuir o fork.
+
+5. Autorizações
+Pedidos de autorização de uso devem ser feitos ao Titular por meio de uma
+issue neste repositório. Uma autorização só é válida se concedida por
+escrito e vale apenas nos termos e para o escopo nela descritos.
+
+6. Ausência de garantia
+O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM GARANTIA DE
+QUALQUER TIPO, EXPRESSA OU IMPLÍCITA. EM NENHUMA HIPÓTESE O TITULAR SERÁ
+RESPONSÁVEL POR DANOS DECORRENTES DO SOFTWARE OU DE SEU USO.
+
+7. Foro
+Esta licença é regida pelas leis da República Federativa do Brasil.
+
+---------------------------------------------------------------------------
+
+PROPRIETARY LICENSE — ALL RIGHTS RESERVED (summary in English)
+
+Copyright (c) 2026 mantis-dev-br. All rights reserved.
+
+This repository is public for viewing only. No license is granted. You may
+not use, copy, modify, merge, publish, distribute, sublicense or sell any part
+of this software, for any purpose, without prior written permission from the
+copyright holder. Viewing and forking through GitHub are allowed only as
+required by the GitHub Terms of Service. THE SOFTWARE IS PROVIDED "AS IS",
+WITHOUT WARRANTY OF ANY KIND. The Portuguese text above prevails.

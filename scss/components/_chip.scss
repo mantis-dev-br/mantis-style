@@ -1,0 +1,39 @@
+// ============================================================
+// Chips (filtros)
+// <button class="chip" aria-pressed="true">Todos</button>
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}chip {
+  display: inline-flex;
+  align-items: center;
+  gap: space(quark);
+  height: control-height(sm);
+  padding: 0 space(mini);
+  border-radius: radius(pill);
+  box-shadow: inset 0 0 0 1px v(interactive-secondary);
+  color: v(content-title);
+  font-size: .875rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  @include transition((background-color, color, box-shadow));
+  @include disabled-state;
+
+  &:hover:not(:disabled) { background: v(interactive-secondary); }
+
+  &[aria-pressed="true"],
+  &.is-active {
+    background: v(interactive-primary);
+    color: v(interactive-primary-fg);
+    box-shadow: none;
+  }
+
+  &-sm { height: 1.75rem; padding: 0 space(micro); font-size: .75rem; }
+}
+
+.#{$prefix}chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: space(nano);
+}

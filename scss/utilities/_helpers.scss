@@ -1,0 +1,57 @@
+// ============================================================
+// Utilidades escritas à mão (não cabem no gerador)
+// ============================================================
+@use "../tools" as *;
+
+$_p: $prefix;
+
+// Texto
+.#{$_p}truncate { @include truncate; }
+.#{$_p}line-clamp-1 { @include line-clamp(1); }
+.#{$_p}line-clamp-2 { @include line-clamp(2); }
+.#{$_p}line-clamp-3 { @include line-clamp(3); }
+
+// Acessibilidade
+.#{$_p}sr-only { @include visually-hidden; }
+
+// Grid
+.#{$_p}grid > * { min-width: 0; }
+.#{$_p}grid-auto { grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr)); }
+.#{$_p}col-full { grid-column: 1 / -1; }
+
+// Colunas assimétricas do mpanel (viram uma coluna abaixo de lg)
+.#{$_p}cols-2-1 { grid-template-columns: 2fr 1fr; }
+.#{$_p}cols-1-2 { grid-template-columns: 1fr 2fr; }
+.#{$_p}cols-3-2 { grid-template-columns: 3fr 2fr; }
+.#{$_p}cols-2-3 { grid-template-columns: 2fr 3fr; }
+
+@include media-down(lg) {
+  .#{$_p}cols-2-1,
+  .#{$_p}cols-1-2,
+  .#{$_p}cols-3-2,
+  .#{$_p}cols-2-3 { grid-template-columns: 1fr; }
+}
+
+// Movimento
+.#{$_p}transition {
+  transition:
+    background-color $duration-fast,
+    color $duration-fast,
+    border-color $duration-fast,
+    box-shadow $duration-fast,
+    transform $duration-base,
+    opacity $duration-base;
+}
+.#{$_p}transition-none { transition: none; }
+
+.#{$_p}animate-fade { animation: kf(fade) $duration-base $easing; }
+.#{$_p}animate-pop { animation: kf(pop) $duration-base $easing; }
+.#{$_p}animate-slide-up { animation: kf(slide-up) $duration-base $easing; }
+.#{$_p}animate-pulse { animation: kf(pulse) 1.4s $easing infinite; }
+.#{$_p}animate-spin { animation: kf(spin) 1s linear infinite; }
+
+// Rolagem sem barra visível
+.#{$_p}scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}

@@ -1,0 +1,40 @@
+// ============================================================
+// Barra de progresso
+// <div class="progress is-warning" role="progressbar" aria-valuenow="72"><span style="width:72%"></span></div>
+// Estados: is-positive, is-warning, is-negative (ou is-danger), is-info
+// Tamanhos: progress-sm, progress-lg · Sem valor: progress-indeterminate
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}progress {
+  height: .5rem;
+  overflow: hidden;
+  border-radius: radius(pill);
+  background: v(interactive-secondary);
+
+  > span,
+  > .#{$prefix}progress-bar {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: v(interactive-primary);
+    transition: width $duration-slow $easing;
+  }
+
+  @each $s in $statuses {
+    &.is-#{$s} > span,
+    &.is-#{$s} > .#{$prefix}progress-bar { background: v($s); }
+  }
+
+  &.is-danger > span,
+  &.is-danger > .#{$prefix}progress-bar { background: v(negative); }
+
+  &-sm { height: .25rem; }
+  &-lg { height: .75rem; }
+
+  &-indeterminate > span,
+  &-indeterminate > .#{$prefix}progress-bar {
+    width: 40%;
+    animation: kf(indeterminate) 1.2s $easing infinite;
+  }
+}

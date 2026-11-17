@@ -1,0 +1,87 @@
+// ============================================================
+// Menu suspenso (dropdown)
+// <div class="dropdown">
+//   <button class="btn btn-outline">Opções</button>
+//   <div class="menu menu-end" role="menu">
+//     <p class="menu-label">Conta</p>
+//     <button class="menu-item" role="menuitem">Perfil <kbd class="menu-shortcut">P</kbd></button>
+//     <div class="menu-sep"></div>
+//     <button class="menu-item menu-item-danger">Sair</button>
+//   </div>
+// </div>
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.#{$prefix}menu {
+  position: absolute;
+  z-index: z(dropdown);
+  min-width: 15rem;
+  padding: space(nano);
+  border: 1px solid v(layout-border);
+  border-radius: radius(md);
+  background: v(layout-surface);
+  box-shadow: shadow(level4);
+  animation: kf(pop) $duration-fast $easing;
+
+  .#{$prefix}dropdown > & {
+    top: calc(100% + #{space(quark)});
+    left: 0;
+  }
+
+  .#{$prefix}dropdown > &.#{$prefix}menu-end {
+    left: auto;
+    right: 0;
+  }
+
+  &-static {
+    position: static;
+    animation: none;
+  }
+}
+
+.#{$prefix}menu-label {
+  padding: space(nano) space(nano) space(quark);
+  color: v(content-placeholder);
+  @include type(heading-xxxs);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.#{$prefix}menu-item {
+  display: flex;
+  align-items: center;
+  gap: space(nano);
+  width: 100%;
+  height: control-height(md);
+  padding: 0 space(nano);
+  border-radius: radius(sm);
+  color: v(content-title);
+  font-size: .875rem;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+  @include transition((background-color));
+  @include disabled-state;
+
+  &:hover:not(:disabled),
+  &:focus-visible { background: v(interactive-secondary); }
+
+  &-danger { color: v(negative-fg); }
+}
+
+.#{$prefix}menu-shortcut {
+  margin-left: auto;
+  color: v(content-placeholder);
+  font-size: .75rem;
+}
+
+.#{$prefix}menu-sep {
+  height: 1px;
+  margin: space(quark) 0;
+  background: v(layout-border);
+}

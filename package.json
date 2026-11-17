@@ -1,0 +1,64 @@
+{
+  "name": "mantis-style",
+  "version": "1.0.0",
+  "description": "Design system Mantis em SCSS: tokens, temas claro/escuro, reboot, componentes e utilidades no estilo Tailwind.",
+  "keywords": [
+    "scss",
+    "sass",
+    "css",
+    "design-system",
+    "ui",
+    "utilities",
+    "mantis"
+  ],
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "mantis-dev-br",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mantis-dev-br/mantis-style.git"
+  },
+  "homepage": "https://github.com/mantis-dev-br/mantis-style#readme",
+  "bugs": {
+    "url": "https://github.com/mantis-dev-br/mantis-style/issues"
+  },
+  "private": true,
+  "style": "dist/mantis-style.css",
+  "sass": "scss/mantis-style.scss",
+  "main": "dist/mantis-style.css",
+  "exports": {
+    ".": {
+      "sass": "./scss/mantis-style.scss",
+      "style": "./dist/mantis-style.css",
+      "default": "./dist/mantis-style.css"
+    },
+    "./core": {
+      "sass": "./scss/mantis-style-core.scss",
+      "style": "./dist/mantis-style-core.css",
+      "default": "./dist/mantis-style-core.css"
+    },
+    "./utilities": {
+      "sass": "./scss/mantis-style-utilities.scss",
+      "style": "./dist/mantis-style-utilities.css",
+      "default": "./dist/mantis-style-utilities.css"
+    },
+    "./scss/*": "./scss/*",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "scss",
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run build:expanded && npm run build:min",
+    "build:expanded": "sass --no-source-map scss/mantis-style.scss:dist/mantis-style.css scss/mantis-style-core.scss:dist/mantis-style-core.css scss/mantis-style-utilities.scss:dist/mantis-style-utilities.css",
+    "build:min": "sass --no-source-map --style=compressed scss/mantis-style.scss:dist/mantis-style.min.css scss/mantis-style-core.scss:dist/mantis-style-core.min.css scss/mantis-style-utilities.scss:dist/mantis-style-utilities.min.css",
+    "watch": "sass --watch scss/mantis-style.scss:dist/mantis-style.css"
+  },
+  "devDependencies": {
+    "sass": "^1.80.0"
+  }
+}

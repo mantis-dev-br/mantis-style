@@ -1,0 +1,54 @@
+// ============================================================
+// Acordeão (usa <details> nativo, sem JavaScript)
+// <div class="accordion">
+//   <details class="accordion-item" open>
+//     <summary>Pergunta</summary>
+//     <div>Resposta</div>
+//   </details>
+// </div>
+// ============================================================
+@use "../tools" as *;
+
+.#{$prefix}accordion {
+  display: flex;
+  flex-direction: column;
+  gap: space(nano);
+}
+
+.#{$prefix}accordion-item {
+  border-radius: radius(md);
+  background: v(interactive-secondary);
+
+  > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: space(micro);
+    padding: space(micro) space(mini);
+    border-radius: radius(md);
+    color: v(content-title);
+    font-weight: 500;
+    list-style: none;
+    cursor: pointer;
+
+    &::-webkit-details-marker { display: none; }
+
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      width: .5rem;
+      height: .5rem;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform $duration-fast $easing;
+    }
+  }
+
+  &[open] > summary::after { transform: rotate(-135deg) translateY(-2px); }
+
+  > :not(summary) {
+    padding: 0 space(mini) space(mini);
+    color: v(content-base);
+  }
+}

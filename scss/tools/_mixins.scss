@@ -1,0 +1,114 @@
+// ============================================================
+// Mixins. Não geram CSS sozinhos.
+// ============================================================
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "../settings" as s;
+@use "functions" as f;
+
+/// Transforma um mapa em variáveis CSS: ("a": 1) => --ms-a: 1
+@mixin css-vars($map, $namespace: "") {
+  @each $key, $value in $map {
+    --#{s.$var-prefix}#{$namespace}#{$key}: #{meta.inspect($value)};
+  }
+}
+
+/// Aplica um estilo da escala tipográfica: @include type(heading-sm);
+@mixin type($key) {
+  @if not map.has-key(s.$type-scale, $key) {
+    @error "mantis-style: estilo tipográfico '#{$key}' não existe em $type-scale.";
+  }
+  $t: map.get(s.$type-scale, $key);
+  font-weight: list.nth($t, 1);
+  font-size: list.nth($t, 2);
+  line-height: list.nth($t, 3);
+}
+
+/// Abaixo do breakpoint (desktop-first): @include media-down(md) { ... }
+@mixin media-down($bp) {
+  @media (max-width: f.bp-max($bp)) { @content; }
+}
+
+/// A partir do breakpoint (mobile-first): @include media-up(md) { ... }
+@mixin media-up($bp) {
+  @media (min-width: f.bp-min($bp)) { @content; }
+}
+
+/// Entre dois breakpoints.
+@mixin media-between($from, $to) {
+  @media (min-width: f.bp-min($from)) and (max-width: f.bp-max($to)) { @content; }
+}
+
+/// Estilos só no tema escuro (explícito ou pelo sistema operacional).
+/// Use dentro de um seletor: .logo { @include dark { filter: invert(1); } }
+@mixin dark {
+  @if s.$enable-dark-mode {
+    [#{s.$theme-attribute}="dark"] & { @content; }
+    @if s.$enable-auto-dark-mode {
+      @media (prefers-color-scheme: dark) {
+        :root:not([#{s.$theme-attribute}="light"]) & { @content; }
+      }
+    }
+  }
+}
+
+/// Anel de foco dos campos.
+@mixin focus-ring($border: f.v(highlight-focus)) {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 1px $border,
+    0 0 0 s.$focus-ring-width color-mix(in srgb, #{f.v(ring-shadow)} 40%, transparent);
+}
+
+/// Contorno de foco por teclado (botões, links, controles).
+@mixin focus-outline {
+  outline: 2px solid f.v(highlight-focus);
+  outline-offset: 2px;
+}
+
+/// Transição padrão: @include transition((background-color, color));
+@mixin transition($props: (background-color, color, border-color, box-shadow), $duration: s.$duration-fast) {
+  $list: ();
+  @each $p in $props {
+    $list: list.append($list, $p $duration s.$easing, $separator: comma);
+  }
+  transition: $list;
+}
+
+/// Estado desabilitado comum a controles.
+@mixin disabled-state {
+  &:disabled,
+  &[aria-disabled="true"],
+  &.is-disabled {
+    opacity: s.$opacity-disabled;
+    cursor: not-allowed;
+  }
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines;
+  overflow: hidden;
+}
+
+/// Esconde na tela e mantém para leitores de tela.
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
